@@ -7,7 +7,7 @@ class array_bundle {
 public:
     array_bundle() = default;
 
-     array_bundle(size_t size) {
+    array_bundle(size_t size) {
         if (size == 0) {
             rawptr = nullptr;
         } else {

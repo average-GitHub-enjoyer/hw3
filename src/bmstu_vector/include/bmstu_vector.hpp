@@ -17,7 +17,7 @@ namespace bmstu {
             using pointer = Type *;
             using reference = Type &;
 
-             iterator(pointer ptr) : m_ptr(ptr) {
+            iterator(pointer ptr) : m_ptr(ptr) {
 
             }
 
@@ -158,7 +158,7 @@ namespace bmstu {
             return data_.Get();
         }
 
-const_iterator cend() const noexcept {
+        const_iterator cend() const noexcept {
             return data_.Get() + size_;
         }
 
@@ -216,8 +216,8 @@ const_iterator cend() const noexcept {
                 Reserve(new_capacity);
             } else {
                 std::fill(end(), begin() + new_size, Type{});
-                size_ = new_size;
             }
+            size_ = new_size;
         }
 
         void Reserve(size_t new_capacity) {
@@ -291,7 +291,18 @@ const_iterator cend() const noexcept {
         }
 
         friend bool operator!=(const vector<Type> &l, const vector<Type> &r) {
-            return l != r;
+            bool isEq = true;
+
+            if (l.size() != r.size())
+                return true;
+            if (l.capacity() != r.capacity())
+                return true;
+
+            for (int i=0; i < r.size(); i++){
+                isEq *= r[i] == l[i];
+            }
+            
+            return !isEq;
         }
 
 friend bool operator<(const vector<Type> &l, const vector<Type> &r) {
